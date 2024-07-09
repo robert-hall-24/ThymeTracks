@@ -15,7 +15,7 @@ export const Primary: Story = {
     <Background>
       <Avatar
         className="h-32 w-32 rounded-full"
-        src="https://www.w3schools.com/w3images/avatar2.png"
+        src="https://media.licdn.com/dms/image/C5603AQFNSYsgI_rAbg/profile-displayphoto-shrink_800_800/0/1597302294920?e=1726099200&v=beta&t=qz48tM1E0z8eZmK8Nxmlatvz0Kcr8s1FDehmoKUWl6w"
       />
     </Background>
   ),
