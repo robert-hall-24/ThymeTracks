@@ -1,14 +1,17 @@
 import { useState } from 'react';
 
 interface DailyTileFormProps {
+    id: number;
     hours: number;
     stats: string;
     onSubmit: (data: { hours: number; stats: string }) => void;
     onCancel: () => void;
     mode: 'daily' | 'weekly' | 'monthly';
+    tiles: { id: number, hours: number }[];
+    currentTileId: number;
 }
 
-export default function DailyTileForm({ hours, stats, onSubmit, onCancel, mode }: DailyTileFormProps) {
+export default function DailyTileForm({ hours, stats, onSubmit, onCancel, mode, tiles, currentTileId }: DailyTileFormProps) {
     const [formData, setFormData] = useState({ hours, stats });
     const [error, setError] = useState<string | null>(null);
 
@@ -22,23 +25,38 @@ export default function DailyTileForm({ hours, stats, onSubmit, onCancel, mode }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        let validHours;
+
+
+        // Calculate the required total hours based on the mode
+        let validTotalHours;
         switch (mode) {
             case 'daily':
-                validHours = 24;
+                validTotalHours = 24;
                 break;
             case 'weekly':
-                validHours = 168;
+                validTotalHours = 168;
                 break;
             case 'monthly':
-                validHours = 720;
+                validTotalHours = 720;
                 break;
             default:
-                validHours = 24;
+                validTotalHours = 24;
         }
 
-        if (formData.hours !== validHours) {
-            setError(`Hours must equal ${validHours}.`);
+        // Calculate the current total hours excluding the current tile
+        const currentTotalHours = tiles
+            .filter(tile => tile.id !== currentTileId)
+            .reduce((acc, tile) => acc + tile.hours, 0);
+            console.log(tiles)
+            console.log(`tile hours${formData.hours}`)
+
+        // Calculate the new total hours including the new value from the form
+        const newTotalHours = currentTotalHours + formData.hours;
+        console.log(newTotalHours)
+
+        // Validate the new total hours
+        if (newTotalHours > validTotalHours) {
+            setError(`Total hours across all tiles must not exceed ${validTotalHours}.`);
             return;
         }
 
@@ -90,6 +108,8 @@ export default function DailyTileForm({ hours, stats, onSubmit, onCancel, mode }
         </form>
     );
 }
+
+
 
 
 

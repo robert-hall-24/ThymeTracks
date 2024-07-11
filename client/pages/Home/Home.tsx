@@ -43,22 +43,22 @@ export default function Home() {
             </div>
           </div>
           <div className="bg-orange-700 rounded-lg p-4">
-            <DailyTileContainer title={'Work'} mode={'daily'} />
+            <DailyTileContainer title={'Work'} mode={'daily'} id={1} />
           </div>
           <div className="bg-green-600 rounded-lg p-4">
-            <DailyTileContainer title={'Play'} mode={'daily'} />
+            <DailyTileContainer title={'Play'} mode={'daily'} id={2} />
           </div>
           <div className="bg-red-600 rounded-lg p-4">
-            <DailyTileContainer title={'Study'} mode={'daily'} />
+            <DailyTileContainer title={'Study'} mode={'daily'} id={3} />
           </div>
           <div className="bg-blue-600 rounded-lg p-4">
-            <DailyTileContainer title={'Exercise'} mode={'daily'} />
+            <DailyTileContainer title={'Exercise'} mode={'daily'} id={4} />
           </div>
           <div className=" bg-purple-600 rounded-lg p-4">
-            <DailyTileContainer title={'Social'} mode={'daily'} />
+            <DailyTileContainer title={'Social'} mode={'daily'} id={5} />
           </div>
           <div className=" bg-yellow-600 rounded-lg p-4">
-            <DailyTileContainer title={'Self Care'} mode={'daily'} />
+            <DailyTileContainer title={'Self Care'} mode={'daily'} id={6} />
           </div>
         </div>
       </div>
