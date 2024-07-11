@@ -3,13 +3,19 @@ import DailyTile from './DailyTile';
 import DailyTileForm from './DailyTileForm';
 
 interface DailyTileContainerProps {
+    id: number;
     title: string;
     mode: 'daily' | 'weekly' | 'monthly';
 }
 
-export default function DailyTileContainer({ title, mode }: DailyTileContainerProps) {
-    const [tileData, setTileData] = useState({
-        hours: 24,
+interface TileData {
+    hours: number;
+    stats: string;
+}
+
+export default function DailyTileContainer({ id, title, mode }: DailyTileContainerProps) {
+    const [tileData, setTileData] = useState<TileData>({
+        hours: 0,
         stats: 'Sample Stats'
     });
     const [isEditing, setIsEditing] = useState(false);
@@ -36,7 +42,9 @@ export default function DailyTileContainer({ title, mode }: DailyTileContainerPr
                     onSubmit={handleSubmit}
                     onCancel={handleCancel}
                     mode={mode}
-                />
+                    tiles={[]}
+                    currentTileId={id} 
+                    id={0}                />
             ) : (
                 <DailyTile
                     title={title}
