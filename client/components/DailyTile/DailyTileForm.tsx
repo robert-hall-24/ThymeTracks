@@ -1,13 +1,12 @@
 import { useState } from 'react';
 
 interface DailyTileFormProps {
-    id: number;
     hours: number;
     stats: string;
     onSubmit: (data: { hours: number; stats: string }) => void;
     onCancel: () => void;
     mode: 'daily' | 'weekly' | 'monthly';
-    tiles: { id: number, hours: number }[];
+    tiles: { id: number, hours: number, stats: string }[];
     currentTileId: number;
 }
 
@@ -45,14 +44,15 @@ export default function DailyTileForm({ hours, stats, onSubmit, onCancel, mode, 
 
         // Calculate the current total hours excluding the current tile
         const currentTotalHours = tiles
-            .filter(tile => tile.id !== currentTileId)
             .reduce((acc, tile) => acc + tile.hours, 0);
-            console.log(tiles)
+            console.log(`current tile id: ${currentTileId}`)
+            console.log(`tiles: ${tiles}`)
             console.log(`tile hours${formData.hours}`)
+            console.log(`current total hours: ${currentTotalHours}`)
 
         // Calculate the new total hours including the new value from the form
         const newTotalHours = currentTotalHours + formData.hours;
-        console.log(newTotalHours)
+        console.log(`new total hours: ${newTotalHours}`)
 
         // Validate the new total hours
         if (newTotalHours > validTotalHours) {
