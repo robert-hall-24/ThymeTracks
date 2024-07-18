@@ -15,4 +15,16 @@ router.get('/', async (req, res) => {
   }
 })
 
+
+router.post("/", async (req, res, next) => {
+  try {
+    const create_activity = req.body
+    const creatingTask = await db.addActivity(create_activity)
+    res.status(200).json({ created: creatingTask })
+  } catch (e) {
+    next(e)
+  }
+  
+})
+
 export default router
