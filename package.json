@@ -14,6 +14,7 @@
     "dev:client": "vite",
     "dev:server": "tsx watch server/index.ts",
     "dev:css": "tailwindcss -i client/styles/main.css -o public/output.css --watch",
+    "dbconfig": "npm run knex migrate:latest && npm run knex seed:run",
     "build": "run-s build:client build:server",
     "build:client": "vite build",
     "build:server": "esbuild --packages=external --platform=node --format=esm --outfile=dist/server.js --bundle server/index.ts",
