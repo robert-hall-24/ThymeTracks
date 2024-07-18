@@ -21,19 +21,19 @@ export default function Monthly() {
                 <nav className="flex flex-col space-y-2">
                   <Link
                     to="/"
-                    className="text-font hover:bg-gray-200 rounded-md p-2"
+                    className="text-font hover:bg-profilePrimary rounded-md p-2"
                   >
                     Daily
                   </Link>
                   <Link
                     to="/weekly"
-                    className="text-font hover:bg-gray-200 rounded-md p-2"
+                    className="text-font hover:bg-profilePrimary rounded-md p-2"
                   >
                     Weekly
                   </Link>
                   <Link
                     to="/monthly"
-                    className="text-font hover:bg-gray-200 rounded-md p-2"
+                    className="text-font hover:bg-profilePrimary bg-profilePrimary rounded-md p-2"
                   >
                     Monthly
                   </Link>
