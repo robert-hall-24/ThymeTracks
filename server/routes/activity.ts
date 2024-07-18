@@ -15,6 +15,18 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.patch("/:id", async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const updatedAct = req.body
+    const updateTask = await db.updateAct(updatedAct, id)
+    res.status(200).json({ updated: updateTask })
+  } catch (e) {
+    next(e)
+  }
+  
+})
+
 
 router.post("/", async (req, res, next) => {
   try {
