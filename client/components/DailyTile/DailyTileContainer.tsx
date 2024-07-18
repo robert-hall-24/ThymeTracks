@@ -9,12 +9,15 @@ interface DailyTileContainerProps {
 }
 
 interface TileData {
+    id: number;
     hours: number;
     stats: string;
 }
 
+
 export default function DailyTileContainer({ id, title, mode }: DailyTileContainerProps) {
     const [tileData, setTileData] = useState<TileData>({
+        id,
         hours: 0,
         stats: 'Sample Stats'
     });
@@ -44,7 +47,7 @@ export default function DailyTileContainer({ id, title, mode }: DailyTileContain
                     mode={mode}
                     tiles={[]}
                     currentTileId={id} 
-                    id={0}                />
+                                          />
             ) : (
                 <DailyTile
                     title={title}
