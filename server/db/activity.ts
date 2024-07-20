@@ -2,18 +2,21 @@ import connection from './connection.ts'
 import { Activity } from '../../models/activity.ts'
 
 export async function getAllActivities(): Promise<Activity[]> {
-    return connection("activity").select()
-    
+  return connection('activity').select()
+}
+
+export function getActivityByID(id: number) {
+  const active = connection('activity').where({ id }).select()
+  return active
 }
 
 export function updateAct(updateTask: Activity, id: number) {
-    const {  hours, stats } = updateTask
-    const count = connection('activity').where({ id }).update({ hours, stats })
-    return count
-  }
+  const { hours, stats } = updateTask
+  const count = connection('activity').where({ id }).update({ hours, stats })
+  return count
+}
 
 export async function addActivity(activity: Activity) {
-    const create_activity = connection('activity').insert({ ...activity })
-    return create_activity
-    
+  const create_activity = connection('activity').insert({ ...activity })
+  return create_activity
 }

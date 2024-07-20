@@ -15,7 +15,20 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.patch("/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const event = await db.getActivityByID(id)
+    if (!event) {
+      res.sendStatus(404)
+    }
+    res.json(event)
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.patch('/:id', async (req, res, next) => {
   try {
     const id = Number(req.params.id)
     const updatedAct = req.body
@@ -24,11 +37,9 @@ router.patch("/:id", async (req, res, next) => {
   } catch (e) {
     next(e)
   }
-  
 })
 
-
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const create_activity = req.body
     const creatingTask = await db.addActivity(create_activity)
@@ -36,7 +47,6 @@ router.post("/", async (req, res, next) => {
   } catch (e) {
     next(e)
   }
-  
 })
 
 export default router
