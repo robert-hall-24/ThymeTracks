@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import DailyTile from './DailyTile'
 import DailyTileForm from './DailyTileForm'
-import { useActivity } from '../../hooks/useActivities'
+import { useActivity, useActivityHours } from '../../hooks/useActivities'
 
 interface DailyTileContainerProps {
   id: number
   title: string
-  mode: 'daily' | 'weekly' | 'monthly'
+  mode: 1 | 2 | 3
 }
 
 interface TileData {
@@ -26,8 +26,10 @@ export default function DailyTileContainer({
     stats: 'Sample Stats',
   })
   const [isEditing, setIsEditing] = useState(false)
-  const { data, isLoading, isError } = useActivity()
-  console.log('back end data', data)
+  const { data, isLoading, isError } = useActivityHours(
+    Number(mode),
+    Number(id),
+  )
 
   if (isLoading) {
     return <span> Loading...</span>
@@ -65,7 +67,7 @@ export default function DailyTileContainer({
       ) : (
         <DailyTile
           title={title}
-          hours={tileData.hours}
+          hours={data}
           stats={tileData.stats}
           onEdit={handleEdit}
         />

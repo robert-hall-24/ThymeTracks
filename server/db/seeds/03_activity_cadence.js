@@ -16,7 +16,7 @@ export async function seed(knex) {
           seedData.push({
             Activity_ID: activity.ID,
             Cadence_ID: cadence.ID,
-            Hours: 0, // Initialize Hours to zero for all combinations
+            Hours: 1, // Initialize Hours to zero for all combinations
           })
         })
       })
