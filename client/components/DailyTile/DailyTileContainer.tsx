@@ -2,6 +2,8 @@ import { useState } from 'react'
 import DailyTile from './DailyTile'
 import DailyTileForm from './DailyTileForm'
 import { useActivity, useActivityHours } from '../../hooks/useActivities'
+import { useMutation } from '@tanstack/react-query'
+import { updateHours } from '../../apis/update-hours'
 
 interface DailyTileContainerProps {
   id: number
@@ -43,7 +45,7 @@ export default function DailyTileContainer({
     setIsEditing(true)
   }
 
-  const handleSubmit = (data: { hours: number; stats: string }) => {
+  const handleSubmit = (data: { hours: number }) => {
     setTileData({ ...tileData, ...data })
     setIsEditing(false)
   }
@@ -57,11 +59,9 @@ export default function DailyTileContainer({
       {isEditing ? (
         <DailyTileForm
           hours={tileData.hours}
-          stats={tileData.stats}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
           mode={mode}
-          tiles={[]}
           currentTileId={id}
         />
       ) : (

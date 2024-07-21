@@ -29,17 +29,29 @@ router.get('/:id1/:id2', async (req, res, next) => {
   try {
     const id1 = Number(req.params.id1) // The mode id
     const id2 = Number(req.params.id2) // The card ID
-    const event = await db.getTotalHours(id1,id2)
+    const event = await db.getTotalHours(id1, id2)
     if (!event) {
       res.sendStatus(404)
     }
     res.json(event)
-  } catch(e) {
+  } catch (e) {
     next(e)
   }
 })
 
-/*
+router.patch('/:id1/:id2', async (req, res, next) => {
+  try {
+    const id1 = Number(req.params.id1)
+    const id2 = Number(req.params.id2)
+    const updatedHours = req.body.hours
+    console.log(updatedHours)
+    const hours = await db.changeCurrentHours(updatedHours, id1, id2)
+    res.status(200).json({ updated: hours })
+  } catch (e) {
+    next(e)
+  }
+})
+
 router.get('/:id', async (req, res, next) => {
   try {
     const id = Number(req.params.id)
@@ -52,7 +64,6 @@ router.get('/:id', async (req, res, next) => {
     next(e)
   }
 })
-  */
 
 router.patch('/:id', async (req, res, next) => {
   try {
