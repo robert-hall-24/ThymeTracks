@@ -8,7 +8,7 @@ export async function getActivity(): Promise<Activity[]> {
   return res.body
 }
 
-// export async function getActivityByID(id: number) {
-//   const res = await request.get(rootUrl + `activity/${id}`)
-//   return res.body
-// }
+export async function getActivityHours(ModeID: number, TileID: number) {
+  const res = await request.get(rootUrl + `/activity${ModeID}/${TileID}`)
+  return res.body
+}
