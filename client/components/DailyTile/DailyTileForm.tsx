@@ -21,14 +21,28 @@ export default function DailyTileForm({
   const [formData, setFormData] = useState({ hours })
   const stats = 'placeholder'
   const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const queryClient = useQueryClient()
   const updateHoursMutation = useMutation({
-    mutationFn: (Hours: hours) => updateHours(Hours, mode, currentTileId),
+    mutationFn: async (Hours: hours) => {
+      try {
+        setIsLoading(true)
+        await updateHours(Hours, mode, currentTileId)
+      } catch (error) {
+        setError('Failed to update hours. Please try again.')
+        throw error
+      }
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['Hours'],
       })
+      setIsLoading(false)
+      onSubmit(formData) // Ensure it runs after success
+    },
+    onError: () => {
+      setIsLoading(false)
     },
   })
 
@@ -43,9 +57,9 @@ export default function DailyTileForm({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    updateHoursMutation.mutate(formData)
+    setIsLoading(true)
     setError(null)
-    onSubmit(formData)
+    updateHoursMutation.mutate(formData)
   }
 
   return (
@@ -74,13 +88,15 @@ export default function DailyTileForm({
         <button
           type="submit"
           className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          disabled={isLoading}
         >
-          Save
+          {isLoading ? 'Saving...' : 'Save'}
         </button>
         <button
           type="button"
           onClick={onCancel}
           className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          disabled={isLoading}
         >
           Cancel
         </button>

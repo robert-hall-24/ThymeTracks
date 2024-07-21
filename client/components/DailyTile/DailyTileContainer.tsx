@@ -45,9 +45,10 @@ export default function DailyTileContainer({
     setIsEditing(true)
   }
 
-  const handleSubmit = (data: { hours: number }) => {
-    setTileData({ ...tileData, ...data })
-    setIsEditing(false)
+  const handleSubmit = () => {
+    if (data) {
+      setIsEditing(false)
+    }
   }
 
   const handleCancel = () => {
@@ -58,7 +59,7 @@ export default function DailyTileContainer({
     <div>
       {isEditing ? (
         <DailyTileForm
-          hours={tileData.hours}
+          hours={data}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
           mode={mode}
