@@ -22,6 +22,11 @@ export async function addActivity(activity: Activity) {
 }
 
 
+export async function getActivityName() {
+  return connection('Activity').select()
+}
+
+
 export async function getTotalHours(cadenceID:number, activityID:number) {
     const result = await connection('Activity_Cadence as ac')
       .join('Activity as a', 'ac.Activity_ID', 'a.ID')
@@ -32,5 +37,6 @@ export async function getTotalHours(cadenceID:number, activityID:number) {
       .first();
     return result;
 }
+
 
 

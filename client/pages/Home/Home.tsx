@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom"
-import Avatar from "../../components/UI/Avatar/Avatar"
-import DailyTileContainer from "../../components/DailyTile/DailyTileContainer"
-
+import { Link } from 'react-router-dom'
+import Avatar from '../../components/UI/Avatar/Avatar'
+import DailyTileContainer from '../../components/DailyTile/DailyTileContainer'
 
 export default function Home() {
   console.log('test')
