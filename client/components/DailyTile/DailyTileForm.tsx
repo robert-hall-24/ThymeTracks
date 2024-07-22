@@ -25,10 +25,10 @@ export default function DailyTileForm({
 
   const queryClient = useQueryClient()
   const updateHoursMutation = useMutation({
-    mutationFn: async (Hours: hours) => {
+    mutationFn: async (formData: { hours: number }) => {
       try {
         setIsLoading(true)
-        await updateHours(Hours, mode, currentTileId)
+        await updateHours(formData, mode, currentTileId)
       } catch (error) {
         setError('Failed to update hours. Please try again.')
         throw error
@@ -55,9 +55,8 @@ export default function DailyTileForm({
     })
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setIsLoading(true)
     setError(null)
     updateHoursMutation.mutate(formData)
   }
@@ -72,6 +71,7 @@ export default function DailyTileForm({
           value={formData.hours}
           onChange={(e) => handleChange(e)}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          disabled={isLoading}
         />
         {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
@@ -82,6 +82,7 @@ export default function DailyTileForm({
           value={stats}
           onChange={(e) => handleChange(e)}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          disabled={isLoading}
         />
       </div>
       <div className="flex space-x-4">

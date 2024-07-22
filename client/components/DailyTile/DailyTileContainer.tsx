@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import DailyTile from './DailyTile'
 import DailyTileForm from './DailyTileForm'
-import { useActivity, useActivityHours } from '../../hooks/useActivities'
-import { useMutation } from '@tanstack/react-query'
-import { updateHours } from '../../apis/update-hours'
+import { useActivityHours } from '../../hooks/useActivities'
 
 interface DailyTileContainerProps {
   id: number
@@ -22,12 +20,14 @@ export default function DailyTileContainer({
   title,
   mode,
 }: DailyTileContainerProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tileData, setTileData] = useState<TileData>({
     id,
     hours: 0,
     stats: 'Sample Stats',
   })
   const [isEditing, setIsEditing] = useState(false)
+
   const { data, isLoading, isError } = useActivityHours(
     Number(mode),
     Number(id),
@@ -45,11 +45,7 @@ export default function DailyTileContainer({
     setIsEditing(true)
   }
 
-  const handleSubmit = () => {
-    if (data) {
-      setIsEditing(false)
-    }
-  }
+  const handleSubmit = () => {}
 
   const handleCancel = () => {
     setIsEditing(false)
