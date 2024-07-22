@@ -2,12 +2,12 @@ import { twMerge } from 'tailwind-merge'
 import { hours } from '../../../models/activity'
 
 interface DailyTileProps {
+  hours: hours | undefined
   title: string
   stats: string
   onEdit: () => void
 }
 
-interface DailyTileProps extends hours {}
 export default function DailyTile({
   title,
   hours,
