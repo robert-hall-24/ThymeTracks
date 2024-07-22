@@ -1,6 +1,8 @@
-# Boilerplate: Fullstack with Sass
+# Thyme Track
 
-## Setup
+Thyme Track is a versatile time-tracking app designed to help you monitor and manage your hours efficiently. Whether you need to track your daily activities, weekly projects, or monthly goals, Thyme Track provides a comprehensive solution to stay organized and productive.
+
+# Tech Stack 
 
 ### What's included
 
